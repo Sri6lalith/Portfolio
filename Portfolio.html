@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sri Nithya Anne - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 25%, #2d2d2d 50%, #1a1a1a 75%, #0c0c0c 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated background particles */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 107, 107, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 217, 61, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(78, 205, 196, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 60% 20%, rgba(162, 155, 254, 0.1) 0%, transparent 50%);
+            animation: backgroundFloat 15s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Floating particles animation */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle cx="100" cy="100" r="3" fill="rgba(255,107,107,0.3)"><animate attributeName="cy" values="100;200;100" dur="6s" repeatCount="indefinite"/></circle><circle cx="300" cy="300" r="2" fill="rgba(255,217,61,0.3)"><animate attributeName="cy" values="300;400;300" dur="8s" repeatCount="indefinite"/></circle><circle cx="700" cy="200" r="2.5" fill="rgba(78,205,196,0.3)"><animate attributeName="cy" values="200;300;200" dur="7s" repeatCount="indefinite"/></circle><circle cx="900" cy="400" r="1.5" fill="rgba(162,155,254,0.3)"><animate attributeName="cy" values="400;500;400" dur="9s" repeatCount="indefinite"/></circle></svg>');
+            opacity: 0.6;
+            animation: particleFloat 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes backgroundFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(1deg); }
+            50% { transform: translateY(-40px) rotate(0deg); }
+            75% { transform: translateY(-20px) rotate(-1deg); }
+        }
+
+        @keyframes particleFloat {
+            0%, 100% { transform: translateX(0px); }
+            25% { transform: translateX(20px); }
+            50% { transform: translateX(0px); }
+            75% { transform: translateX(-20px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes glow {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(255, 107, 107, 0.3), 
+                           0 0 40px rgba(255, 217, 61, 0.2),
+                           0 0 60px rgba(78, 205, 196, 0.1);
+            }
+            50% { 
+                box-shadow: 0 0 30px rgba(255, 107, 107, 0.5), 
+                           0 0 60px rgba(255, 217, 61, 0.3),
+                           0 0 80px rgba(78, 205, 196, 0.2);
+            }
+        }
+
+        @keyframes textGlow {
+            0%, 100% { 
+                text-shadow: 0 0 10px rgba(255, 107, 107, 0.3),
+                           0 0 20px rgba(255, 217, 61, 0.2),
+                           0 0 30px rgba(78, 205, 196, 0.1);
+            }
+            50% { 
+                text-shadow: 0 0 20px rgba(255, 107, 107, 0.5),
+                           0 0 30px rgba(255, 217, 61, 0.3),
+                           0 0 40px rgba(78, 205, 196, 0.2);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 30px rgba(0,0,0,0.5);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideInLeft 1s ease-out;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textGlow 3s ease-in-out infinite;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover {
+            color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+        }
+
+        .nav-links a:hover::before {
+            width: 80%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 50%, #2d2d2d 100%);
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text {
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textGlow 3s ease-in-out infinite;
+        }
+
+        .hero-text h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #cccccc;
+            opacity: 0.8;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .hero-image {
+            text-align: center;
+            animation: slideInRight 1s ease-out;
+        }
+
+        .profile-img {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 107, 107, 0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+            animation: glow 4s ease-in-out infinite;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 25px 80px rgba(255, 107, 107, 0.4);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            color: white;
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.5);
+            animation: pulse 0.5s ease-in-out;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 0;
+            background: rgba(0, 0, 0, 0.7);
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+            margin: 2rem 0;
+            border-radius: 0;
+        }
+
+        section:nth-child(even) {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 4rem;
+            color: #ffffff;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            border-radius: 2px;
+            animation: slideInLeft 1s ease-out 0.5s both;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(45deg, #4ecdc4, #a29bfe);
+            border-radius: 1px;
+            animation: slideInRight 1s ease-out 0.7s both;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .skill-category:hover::before {
+            transform: scaleX(1);
+        }
+
+        .skill-category h3 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-tag {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            background: linear-gradient(45deg, #7c8df0, #8a5cc7);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            position: relative;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d, #4ecdc4);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-content {
+            padding: 2.5rem;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .project-description {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .tech-tag {
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            color: #667eea;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .tech-tag:hover {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .project-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .project-link:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Experience Section */
+        .experience-timeline {
+            position: relative;
+            margin-top: 3rem;
+        }
+
+        .experience-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .experience-title {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-company {
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .experience-duration {
+            color: #666;
+            font-style: italic;
+        }
+
+        .experience-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .experience-description ul {
+            margin-left: 1.5rem;
+        }
+
+        .experience-description li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Education Section */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .education-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .education-degree {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-school {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-duration {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .education-details {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 107, 107, 0.2);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.3);
+        }
+
+        .contact-item h3 {
+            margin-bottom: 1rem;
+            color: #ffffff;
+            font-size: 1.3rem;
+        }
+
+        .contact-item a {
+            color: #ff6b6b;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .contact-item a:hover {
+            background: #ff6b6b;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Experience and Education items */
+        .experience-item, .education-card, .project-card, .skill-category {
+            background: rgba(255, 243, 235, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 179, 186, 0.3);
+            animation: fadeInUp 1s ease-out;
+            transition: all 0.3s ease;
+        }
+
+        .experience-item:hover, .education-card:hover, .project-card:hover, .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+            background: rgba(255, 235, 220, 0.98);
+        }
+
+        .experience-title, .education-degree {
+            color: #2d3436;
+        }
+
+        .experience-company, .education-school {
+            color: #e17055;
+        }
+
+        .experience-duration, .education-duration {
+            color: #636e72;
+        }
+
+        .experience-description, .education-details {
+            color: #636e72;
+        }
+
+        .experience-description ul li {
+            color: #636e72;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #0c0c0c, #1a1a1a);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer p {
+            position: relative;
+            z-index: 1;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-text h2 {
+                font-size: 1.4rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .profile-img {
+                width: 250px;
+                height: 250px;
+            }
+
+            .skill-category {
+                padding: 2rem;
+            }
+
+            .project-content {
+                padding: 2rem;
+            }
+
+            .contact-item {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Remove problematic scroll animations */
+        /* Scroll animations */
+        .animate-on-scroll {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading animation */
+        .loading {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Sri Nithya Anne</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Sri Nithya Anne</h1>
+                    <h2>Cybersecurity Enthusiast | Electrical and Computer Engineer | Application & Network Security </h2>
+                    <p>Passionate about protecting digital landscapes through innovative security solutions and cutting-edge technology</p>
+                    <a href="#contact" class="cta-button">Get In Touch</a>
+                </div>
+                <div class="hero-image">
+                    <img src="profile.jpeg" alt="Sri Nithya Anne" class="profile-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div style="max-width: 900px; margin: 0 auto; text-align: center; font-size: 1.1rem; color: #ffffff; line-height: 1.8;">
+                <p>Hey there! I graduated with a Master's in Electrical and Computer Engineering from Northeastern University, where I specialized in Computer Networks and Security. What drives me every day is the fascinating challenge of securing our increasingly connected digital world.</p>
+                
+                <p>My journey has been quite unique – I've got my hands dirty with everything from designing PCBs and programming microcontrollers to hunting down vulnerabilities and analyzing network traffic. This diverse background gives me a rare perspective where I can think like both a hardware engineer and a cybersecurity analyst, understanding threats from the silicon level all the way up to the application layer.</p>
+                
+                <p>I'm particularly passionate about penetration testing and vulnerability assessment – there's something incredibly satisfying about thinking like an attacker to better defend our systems. Whether I'm setting up honeypots to catch bad actors or building mixed-reality visualizations to understand network traffic patterns, I love finding creative solutions to complex security challenges.</p>
+                
+                <p>When I'm not breaking (and fixing) things in the lab, you'll find me staying up-to-date with the latest security trends, working on my certifications, or contributing to the cybersecurity community. I believe that in our field, continuous learning isn't just important – it's essential for staying ahead of ever-evolving threats.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Skills & Technologies</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>🔐 Cybersecurity & Security Operations</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Burp Suite</span>
+                        <span class="skill-tag">Metasploit</span>
+                        <span class="skill-tag">Nessus</span>
+                        <span class="skill-tag">Wireshark</span>
+                        <span class="skill-tag">Splunk</span>
+                        <span class="skill-tag">Nmap</span>
+                        <span class="skill-tag">CrowdStrike EDR</span>
+                        <span class="skill-tag">SIEM</span>
+                        <span class="skill-tag">Penetration Testing</span>
+                        <span class="skill-tag">Vulnerability Assessment</span>
+                        <span class="skill-tag">Incident Response</span>
+                        <span class="skill-tag">Network Security</span>
+                        <span class="skill-tag">Web Security</span>
+                        <span class="skill-tag">Application Security</span>
+                        <span class="skill-tag">Cryptography</span>
+                        <span class="skill-tag">IDS/IPS</span>
+                        <span class="skill-tag">MITRE ATT&CK</span>
+                        <span class="skill-tag">OWASP</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>💻 Programming & Development</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">C/C++</span>
+                        <span class="skill-tag">Embedded C</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">HTML</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Shell/Bash</span>
+                        <span class="skill-tag">Verilog HDL</span>
+                        <span class="skill-tag">MATLAB</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Pandas</span>
+                        <span class="skill-tag">NumPy</span>
+                        <span class="skill-tag">Scikit-learn</span>
+                        <span class="skill-tag">Matplotlib</span>
+                        <span class="skill-tag">Plotly</span>
+                        <span class="skill-tag">TensorFlow</span>
+                        <span class="skill-tag">PyTorch</span>
+                        <span class="skill-tag">OpenCV</span>
+                        <span class="skill-tag">Flask</span>
+                        <span class="skill-tag">Django</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>⚡ Hardware & Embedded Systems</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">KiCAD</span>
+                        <span class="skill-tag">Mentor Graphics</span>
+                        <span class="skill-tag">Altium Designer</span>
+                        <span class="skill-tag">PCB Design</span>
+                        <span class="skill-tag">Circuit Design</span>
+                        <span class="skill-tag">Arduino</span>
+                        <span class="skill-tag">Raspberry Pi</span>
+                        <span class="skill-tag">Atmega</span>
+                        <span class="skill-tag">STM32</span>
+                        <span class="skill-tag">FPGA</span>
+                        <span class="skill-tag">Microcontrollers</span>
+                        <span class="skill-tag">Firmware Development</span>
+                        <span class="skill-tag">Embedded Systems</span>
+                        <span class="skill-tag">Sensors</span>
+                        <span class="skill-tag">I2C/SPI/UART</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>🌐 Network & Communication</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">TCP/IP</span>
+                        <span class="skill-tag">DNS</span>
+                        <span class="skill-tag">HTTP/HTTPS</span>
+                        <span class="skill-tag">Network Fundamentals</span>
+                        <span class="skill-tag">Wireless Networks</span>
+                        <span class="skill-tag">Network Monitoring</span>
+                        <span class="skill-tag">Protocol Analysis</span>
+                        <span class="skill-tag">Ethernet</span>
+                        <span class="skill-tag">Communication Protocols</span>
+                        <span class="skill-tag">MQTT</span>
+                        <span class="skill-tag">IoT Networks</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>☁️ Cloud & Platforms</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Azure</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Linux (Ubuntu, Kali)</span>
+                        <span class="skill-tag">Windows OS</span>
+                        <span class="skill-tag">Active Directory</span>
+                        <span class="skill-tag">Cloud Security</span>
+                        <span class="skill-tag">Streamlit</span>
+                        <span class="skill-tag">Unity</span>
+                        <span class="skill-tag">Mixed Reality</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>🛠️ Tools & Lab Equipment</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Atmel Studio</span>
+                        <span class="skill-tag">Arduino IDE</span>
+                        <span class="skill-tag">Xilinx</span>
+                        <span class="skill-tag">Multisim</span>
+                        <span class="skill-tag">Oscilloscopes</span>
+                        <span class="skill-tag">Logic Analyzers</span>
+                        <span class="skill-tag">Function Generators</span>
+                        <span class="skill-tag">Multimeters</span>
+                        <span class="skill-tag">Excel</span>
+                        <span class="skill-tag">Office Suite</span>
+                        <span class="skill-tag">SIEM Tools</span>
+                        <span class="skill-tag">EDR Platforms</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">CYBERTRAP: Dynamic Honeypot with Adaptive Intrusion Detection</h3>
+                        <p class="project-description">Developed a sophisticated high-interaction honeypot system that captures and analyzes intrusion events in real-time. The system uses machine learning-based anomaly detection to enhance threat intelligence and improve detection accuracy while reducing false positives.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Scapy</span>
+                            <span class="tech-tag">Isolation Forest</span>
+                            <span class="tech-tag">Streamlit</span>
+                            <span class="tech-tag">AWS EC2</span>
+                            <span class="tech-tag">Machine Learning</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Sri6lalith/Cybertrap-Honeypot" class="project-link">GitHub →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">Mixed Reality Network Traffic Visualization (MRNETViz)</h3>
+                        <p class="project-description">Created an innovative mixed-reality network monitoring system that visualizes network traffic in 3D space. The system provides immersive visualization of TCP, UDP, FTP, and SMTP packets, significantly improving network analysis efficiency and attack diagnostics.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Unity</span>
+                            <span class="tech-tag">XRShark</span>
+                            <span class="tech-tag">C#</span>
+                            <span class="tech-tag">Mixed Reality</span>
+                            <span class="tech-tag">Network Analysis</span>
+                            <span class="tech-tag">3D Visualization</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Sri6lalith/MRNETViz-Project" class="project-link">GitHub →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">Exoplanet Data Visualization</h3>
+                        <p class="project-description">Built an interactive data visualization platform for exploring exoplanet discoveries and characteristics. The project demonstrates advanced data processing and visualization techniques to present complex astronomical data in an accessible format.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Pandas</span>
+                            <span class="tech-tag">Matplotlib</span>
+                            <span class="tech-tag">Plotly</span>
+                            <span class="tech-tag">Data Visualization</span>
+                            <span class="tech-tag">Statistical Analysis</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Sri6lalith/Exoplanet" class="project-link">GitHub →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">Hardware and Firmware Redesign of Valve Driver</h3>
+                        <p class="project-description">Engineered a custom PCB for liquid chromatography equipment valve driver using KiCAD, integrating DRV8711 motor driver with Atmega64 processor. Developed embedded firmware and automated testing scripts, improving homing sequence reliability and aseptic barrier control by 70%.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">KiCAD</span>
+                            <span class="tech-tag">Embedded C</span>
+                            <span class="tech-tag">Atmel Studio</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">PCB Design</span>
+                            <span class="tech-tag">Motor Control</span>
+                            <span class="tech-tag">DRV8711</span>
+                            <span class="tech-tag">Atmega64</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">UV LED Driver PCB Design with Embedded Firmware Control</h3>
+                        <p class="project-description">Designed a precision UV LED Current Driver PCB using Mentor Graphics for advanced liquid chromatography instruments. Implemented precision DAC control system with embedded firmware, achieving less than 0.1% voltage error through comprehensive hardware validation and system optimization.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Mentor Graphics</span>
+                            <span class="tech-tag">Arduino IDE</span>
+                            <span class="tech-tag">SPI Protocol</span>
+                            <span class="tech-tag">DAC Control</span>
+                            <span class="tech-tag">PCB Layout</span>
+                            <span class="tech-tag">Precision Electronics</span>
+                            <span class="tech-tag">Embedded Firmware</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">VLSI Vending Machine Design</h3>
+                        <p class="project-description">Designed and validated a VLSI-based vending machine using finite state machine methodology. Implemented the system using Verilog HDL on FPGA, achieving optimal hardware resource utilization and demonstrating advanced digital design concepts.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Verilog</span>
+                            <span class="tech-tag">FPGA</span>
+                            <span class="tech-tag">Digital Design</span>
+                            <span class="tech-tag">FSM</span>
+                            <span class="tech-tag">VLSI</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">Automatic Car Parking System</h3>
+                        <p class="project-description">Developed an Arduino-based intelligent parking management system integrating IR sensors and LCD displays. The system demonstrates expertise in embedded systems programming and efficient hardware resource utilization for practical applications.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Arduino</span>
+                            <span class="tech-tag">C++</span>
+                            <span class="tech-tag">IR Sensors</span>
+                            <span class="tech-tag">LCD Display</span>
+                            <span class="tech-tag">Embedded Systems</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="experience-timeline">
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <h3 class="experience-title">Research Electrical Engineer Intern</h3>
+                            <p class="experience-company">Waters Corporation</p>
+                        </div>
+                        <div class="experience-duration">Jan 2024 - Jul 2024</div>
+                    </div>
+                    <div class="experience-description">
+                        <ul>
+                            <li>Collaborated with scientists and engineers to facilitate understanding of new design concepts and troubleshoot 10+ electro/mechanical issues across diverse instruments</li>
+                            <li>Designed PCBs for UV LED and valve systems in LC instruments using KiCad and Mentor Graphics, improving system performance by 75% and reducing design time by 90%</li>
+                            <li>Developed and optimized firmware in Embedded C and Python using Arduino and Atmel software, integrating microcontrollers and various sensors, resulting in 98% improvement in operational efficiency</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <h3 class="experience-title">Programmer Analyst</h3>
+                            <p class="experience-company">Cognizant Technology Solutions</p>
+                        </div>
+                        <div class="experience-duration">Mar 2021 - Dec 2022</div>
+                    </div>
+                    <div class="experience-description">
+                        <ul>
+                            <li>Coordinated with cross-functional teams to design, develop, and execute test cases for software projects, contributing to a codebase with 5 team members</li>
+                            <li>Implemented solutions for Cigna Healthcare, utilizing JavaScript and Edifecs tools for map creation, guideline design, and rule-based issue resolution, reducing testing time by 60%</li>
+                            <li>Demonstrated expertise in handling Edifecs tools, managing different healthcare standards and formats (HIPAA X12, NCPDP), and orchestrating inbound and outbound transactions</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <h3 class="experience-title">VLSI Intern</h3>
+                            <p class="experience-company">HySoC Technologies</p>
+                        </div>
+                        <div class="experience-duration">Sep 2019 - Jan 2021</div>
+                    </div>
+                    <div class="experience-description">
+                        <ul>
+                            <li>Led a comprehensive project titled 'Design and Verification of Vending Machine Logic', leading to a significant 75% improvement in project efficiency</li>
+                            <li>Conducted comprehensive research and analyzed data to drive daily project goals, attaining advanced proficiency in Digital Design, Verilog, UART Protocol, System Verilog, and UVM expertise</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="education-grid">
+                <div class="education-card">
+                    <h3 class="education-degree">Master of Science in Electrical and Computer Engineering</h3>
+                    <p class="education-school">Northeastern University, Boston, MA</p>
+                    <p class="education-duration">Jan 2023 - May 2025</p>
+                    <div class="education-details">
+                        <p><strong>Concentration:</strong> Computer Networks and Security</p>
+                        <p><strong>GPA:</strong> 3.79/4.0</p>
+                        <p><strong>Honors:</strong> Alfond Scholarship, Young Gladiators 2023, LEAD360 Graduate Leadership, Student Ambassador</p>
+                        <p><strong>Relevant Coursework:</strong> Wireless Sensors, Communication Systems, IoT, Data Visualization, Computer Networks, XR, Cybersecurity, DBMS</p>
+                    </div>
+                </div>
+                
+                <div class="education-card">
+                    <h3 class="education-degree">Bachelor of Technology in Electronics and Communication Engineering</h3>
+                    <p class="education-school">Geethanjali College of Engineering and Technology, Hyderabad, India</p>
+                    <p class="education-duration">Jul 2016 - Aug 2020</p>
+                    <div class="education-details">
+                        <p><strong>GPA:</strong> 8.7/10.0</p>
+                        <p><strong>Relevant Coursework:</strong> Electronic Devices and Circuit Design, VLSI, Programming, Analog, Digital, Cellular, and Satellite Communications</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 3rem;">
+                <h3 style="text-align: center; margin-bottom: 2rem; color: #2d3436;">🏆 Honors and Certifications</h3>
+                <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;">
+                    <span class="skill-tag">🔷 Microsoft Certified: Azure Fundamentals</span>
+                    <span class="skill-tag">🏅 Microsoft PL-200 Hackathon Challenge 2022 Winner</span>
+                    <span class="skill-tag">🎓 Alfond Scholarship</span>
+                    <span class="skill-tag">🛡️ TryHackMe SOC Level 1 & 2</span>
+                    <span class="skill-tag">🔐 CompTIA Security+ (In Progress)</span>
+                    <span class="skill-tag">👩‍💻 WiCyS Security Training Tier1 Scholarship</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3>Email</h3>
+                    <a href="mailto:annesrinithya@gmail.com">annesrinithya@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <h3>LinkedIn</h3>
+                    <a href="https://www.linkedin.com/in/srinithya-anne/" target="_blank">linkedin.com/in/srinithya-anne</a>
+                </div>
+                <div class="contact-item">
+                    <h3>GitHub</h3>
+                    <a href="https://github.com/Sri6lalith" target="_blank">github.com/Sri6lalith</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Sri Nithya Anne. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add active class to navigation links on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(li => {
+                li.classList.remove('active');
+                if (li.getAttribute('href') === `#${current}`) {
+                    li.classList.add('active');
+                }
+            });
+        });
+
+        // Enhanced hover effects with glowing animations
+        document.querySelectorAll('.skill-category, .project-card, .contact-item').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+                this.style.boxShadow = '0 20px 40px rgba(255, 107, 107, 0.3)';
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
+            });
+        });
+
+        // Animated typing effect for hero title
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            
+            type();
+        }
+
+        // Initialize typing effect on page load
+        window.addEventListener('load', () => {
+            const heroTitle = document.querySelector('.hero-text h1');
+            if (heroTitle) {
+                const originalText = heroTitle.textContent;
+                setTimeout(() => {
+                    typeWriter(heroTitle, originalText, 80);
+                }, 500);
+            }
+        });
+
+        // Add glowing effect to buttons on hover
+        document.querySelectorAll('.cta-button, .project-link, .contact-item a').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 0 20px rgba(255, 107, 107, 0.6), 0 0 40px rgba(255, 217, 61, 0.3)';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '0 8px 25px rgba(255, 107, 107, 0.4)';
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.skill-category, .project-card, .experience-item, .education-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(el);
+        });
+
+        // Random floating particles animation
+        function createFloatingParticle() {
+            const particle = document.createElement('div');
+            particle.style.position = 'fixed';
+            particle.style.width = Math.random() * 4 + 2 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.background = `rgba(${Math.random() * 100 + 155}, ${Math.random() * 100 + 155}, ${Math.random() * 100 + 155}, 0.3)`;
+            particle.style.borderRadius = '50%';
+            particle.style.pointerEvents = 'none';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = window.innerHeight + 'px';
+            particle.style.zIndex = '1';
+            
+            document.body.appendChild(particle);
+            
+            const animationDuration = Math.random() * 4000 + 3000;
+            particle.animate([
+                { transform: 'translateY(0px)', opacity: 0.3 },
+                { transform: `translateY(-${window.innerHeight + 100}px)`, opacity: 0 }
+            ], {
+                duration: animationDuration,
+                easing: 'linear'
+            }).onfinish = () => {
+                particle.remove();
+            };
+        }
+
+        // Create floating particles periodically
+        setInterval(createFloatingParticle, 500);
+    </script> => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(li => {
+                li.classList.remove('active');
+                if (li.getAttribute('href') === `#${current}`) {
+                    li.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
